@@ -1,0 +1,92 @@
+/*USE master
+GO
+IF NOT EXISTS (
+   SELECT name
+   FROM sys.databases
+   WHERE name = 'Prueba'
+)
+CREATE DATABASE Prueba
+GO
+
+USE Prueba
+GO
+
+CREATE TABLE dbo.Producto
+(
+   Id        INT    IDENTITY(1,1) NOT NULL  PRIMARY KEY, -- primary key column
+   Nombre      VARCHAR(50)  NOT NULL,
+   Precio  DECIMAL(15,2)  NOT NULL,
+   Stock     INT  NOT NULL,
+   FechaRegistro DATETIME NOT NULL
+);
+GO
+
+
+
+USE Prueba
+GO
+
+Create procedure [dbo].[USP_ADD_PODUCTO]
+(
+@Nombre varchar (50),
+@Precio DECIMAL(15,2),
+@Stock INT,
+@FechaRegistro datetime
+)
+as
+begin
+Insert into Producto values(@Nombre,@Precio,@Stock,@FechaRegistro)
+End
+
+USE Prueba
+GO
+
+CREATE Procedure [dbo].[USP_LIST_PRODUCTO]  
+as  
+begin  
+select * from Producto
+End  
+ 
+ USE Prueba
+GO
+
+ Create procedure [dbo].[USP_UPDATE_PRODUCTO]
+(
+@Id INT,
+@Nombre varchar (50),
+@Precio DECIMAL(15,2),
+@Stock INT,
+@FechaRegistro datetime
+)
+as
+begin
+Update Producto
+set Nombre=@Nombre,
+Precio=@Precio,
+Stock=@Stock,
+FechaRegistro=@FechaRegistro
+where Id=@Id
+End 
+
+USE Prueba
+GO
+
+Create procedure [dbo].[USP_DELETE_PRODUCTO]
+(
+@Id int
+)
+as
+begin
+Delete from Producto where Id=@Id
+End */
+
+USE Prueba
+GO
+
+Create procedure [dbo].[USP_PRODUCTO_ID](@Id int)  
+AS  
+BEGIN  
+     SELECT * FROM Producto where Id=@Id  
+END  
+GO
+

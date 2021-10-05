@@ -1,0 +1,71 @@
+
+
+
+  <div class="list row">
+    <div class="col-md-8">
+      <div class="input-group mb-3">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Search by title"
+          [(ngModel)]="productos.Id"
+        />
+        <div class="input-group-append">
+          <button
+            class="btn btn-outline-secondary"
+            type="button"
+            (click)="searchTitle()"
+          >
+            Search
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <h4>Listado de Producto</h4>
+      <ul class="list-group">
+        <li
+          class="list-group-item"
+          *ngFor="let producto of productos; let i = index"
+          [class.active]="i == currentIndex"
+          (click)="setActiveTutorial(producto, i)"
+        >
+          {{ productos.Nombres }}
+        </li>
+      </ul>
+  
+      <button class="m-3 btn btn-sm btn-danger" (click)="removeAllProducto(productos.Id)">
+        Remove All
+      </button>
+    </div>
+    <div class="col-md-6">
+      <div *ngIf="currentProducto">
+        <h4>Producto</h4>
+        <div>
+          <label><strong>Nombre:</strong></label> {{ currentProducto.Nombre }}
+        </div>
+        <div>
+          <label><strong>Precio:</strong></label>
+          {{ currentProducto.Precio }}
+        </div>
+        <div>
+            <label><strong>Stock:</strong></label>
+            {{ currentProducto.Stock }}
+          </div>
+          <div>
+            <label><strong>FechaRegistro:</strong></label>
+            {{ currentProducto.FechaRegistro }}
+          </div>
+        <div>
+  
+        <a class="badge badge-warning" routerLink="/details/{{ currentProducto.id }}">
+          Edit
+        </a>
+      </div>
+  
+      <div *ngIf="!currentProducto">
+        <br />
+        <p>Please click on a Producto...</p>
+      </div>
+    </div>
+  </div>
